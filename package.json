@@ -23,6 +23,7 @@
     "mongoose": "^4.10.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-geolocated": "^1.0.3",
     "supertest": "^3.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

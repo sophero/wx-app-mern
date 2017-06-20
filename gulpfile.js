@@ -57,7 +57,7 @@ gulp.task('babel-services', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch(['client/public/js/**/*.js', 'services/src/**/*.js'], ['client-browserify', 'babel-services'])
+    gulp.watch(['client/public/js/**/*.js', 'services/**/*.js'], ['client-browserify', 'babel-services'])
 });
 
 gulp.task('default', () => {

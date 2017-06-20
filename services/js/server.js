@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path'
 
+const darkSkyApiKey = process.env.DARK_SKY_API_KEY;
+
 var app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/todos');
