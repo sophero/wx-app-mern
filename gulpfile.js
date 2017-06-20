@@ -43,7 +43,7 @@ gulp.task('start-server', () => {
   nodemon({
     script: 'index.js',
     ext: 'js',
-    ignore: ['node_modules', 'client/public/dist', 'services/dist/'],
+    ignore: ['node_modules', 'client/public/dist', 'services/dist/', 'test', 'services/models/'],
     env: { 'NODE_ENV': 'development' }
   })
 })

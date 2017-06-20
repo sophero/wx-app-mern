@@ -8,7 +8,10 @@ const wUndergroundApiKey = process.env.WUNDERGROUND_API_KEY;
 
 var app = express();
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/todos');
+
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect('mongodb://localhost/wx');
+}
 
 let toDoModel = mongoose.model('todo', {
     todo: String,
