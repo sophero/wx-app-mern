@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import path from 'path'
+import path from 'path';
+import axios from 'axios';
 
 const darkSkyApiKey = process.env.DARK_SKY_API_KEY;
 
@@ -52,18 +53,26 @@ var server = () => {
         });
     });
 
-    app.get('/update/:date/:completed/:todo', (response, request) => {
-        let { date, completed, todo } = request.params;
-        // { new: true } means send me the updated record! "bring me the new mango"
-        toDoModel.findOneAndUpdate({ date }, { completed, todo }, { new: true }, (error, updatedToDo) => {
-            logError(error);
-            response.send(updatedToDo);
+    app.get('/wx/:lat/:lng', (req, res) => {
+        let reqBody = req.body;
+        let url = `https://api.darksky.net/forecast/${darkSkyApiKey}/${req.params.lat},${req.params.lng}`;
+        axios.get(url).then((wxRes) => {
+            var cur = wxRes.data.currently;
+            res.send({
+                currentWx: {
+                    temp: cur.temperature,
+                    dewPoint: cur.dewPoint,
+                    pressure: cur.pressure,
+                    windBearing: cur.windBearing,
+                    windSpeed: cur.windSpeed
+                }
+            });
         });
     });
 
     app.listen(3000, () => {
-        console.log('App listening on port 3000!')
-    })
+        console.log('App listening on port 3000!');
+    });
 }
 
 export default server;

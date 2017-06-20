@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import Geolocate from './Geolocate';
-// import CurrentWx from './CurrentWx';
+import CurrentWx from './CurrentWx';
 
 class WxApp extends Component {
     constructor() {
@@ -11,17 +11,19 @@ class WxApp extends Component {
             lng: null
         }
         this.setCoords = this.setCoords.bind(this);
-        // this.getCurWx = this.getCurWx.bind(this);
     }
 
     render() {
         let currentWx;
-        if (this.state.wx) {
-            currentWx = <CurrentWx wx={this.state.wx} />
+        if (this.state.lat && this.state.lng) {
+            currentWx =
+                <CurrentWx
+                    lat={this.state.lat}
+                    lng={this.state.lng}
+                />
         }
         return(
             <div>
-                 <h1> Still working...</h1>
                  <Geolocate setCoords={this.setCoords} />
                  <div>
                      Current coordinates:
@@ -38,25 +40,8 @@ class WxApp extends Component {
             lat: props.lat,
             lng: props.lng
         });
-        // }, this.getCurWx());
     }
 
-    // getCurWx() {
-    //     let url = `https://api.darksky.net/forecast/${darkSkyApiKey}/${this.state.lat},${this.state.lng}`;
-    //
-    //     axios.get(url).then((response) => {
-    //         var cur = response.data.currently;
-    //         this.setState({
-    //             wx: {
-    //                 temp: cur.temperature,
-    //                 dewPoint: cur.dewPoint,
-    //                 pressure: cur.pressure,
-    //                 windBearing: cur.windBearing,
-    //                 windSpeed: cur.windSpeed
-    //             }
-    //         });
-    //     });
-    // }
 }
 
 export default WxApp;
