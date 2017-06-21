@@ -44,7 +44,7 @@ class CurrentWx extends Component {
 
     getCurWx() {
         axios
-            .get(`http://localhost:3000/wx/${this.state.lat}/${this.state.lng}`)
+            .get(`http://localhost:3000/api/wx/${this.state.lat}/${this.state.lng}`)
             .then((response) => {
                 this.setState({
                     wx: response.data.currentWx

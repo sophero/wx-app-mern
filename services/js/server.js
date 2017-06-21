@@ -11,10 +11,9 @@ if (process.env.NODE_ENV !== 'test') {
     mongoose.connect('mongodb://localhost/wx');
 }
 
-
+app.use(express.static('client/public'));
 app.use(bodyParser.json()); // must be placed above routes call!!
 routes(app);
 
-// app.use(express.static( __dirname + '/client/public'));
 
 module.exports = app;
