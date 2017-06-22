@@ -12,4 +12,6 @@ module.exports = (app) => {
 
     app.get('/api/wx/:lat/:lng', WxApiController.curWeather);
     app.get('/api/radar/:lat/:lng', WxApiController.curRadar);
+    app.get('/api/pastwx/:lat/:lng/:time', WxApiController.pastWeather);
+
 };

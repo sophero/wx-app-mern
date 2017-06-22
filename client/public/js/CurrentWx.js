@@ -29,6 +29,7 @@ class CurrentWx extends Component {
     }
 
     render() {
+        console.log(this.state);
         if (this.state.wx) {
             let windStr = this.windDirection(this.state.wx.windBearing);
             let tempC = this.fahrenheitToCelsius(this.state.wx.temp);
@@ -54,12 +55,12 @@ class CurrentWx extends Component {
     }
 
     getCurWx() {
+        let { lat, lng } = this.state;
+        console.log(lat, lng);
         axios
-            .get(`/api/wx/${this.state.lat}/${this.state.lng}`)
-            .then((response) => {
-                this.setState({
-                    wx: response.data.currentWx
-                });
+            .get(`/api/wx/${lat}/${lng}`)
+            .then((wxRes) => {
+                this.setState({ wx: wxRes.data.curWx });
             });
     }
 

@@ -17,6 +17,8 @@ class WxApp extends Component {
     render() {
         let currentWx;
         if (this.state.lat && this.state.lng) {
+            var lat = Math.round(this.state.lat * 1000000) / 1000000;
+            var lng = Math.round(this.state.lng * 1000000) / 1000000;
             currentWx =
                 <CurrentWx
                     lat={this.state.lat}
@@ -30,10 +32,21 @@ class WxApp extends Component {
                 <InputLocation setCoords={this.setCoords} />
                 {currentWx}
                 <div>
-                    Lat: {this.state.lat}
+                    Lat: {lat}
                 </div>
                 <div>
-                    Lng: {this.state.lng}
+                    Lng: {lng}
+                </div>
+                <div>
+                    <a href="https://darksky.net/poweredby/" target="_blank">
+                        <div style={{
+                            backgroundImage: "url('https://darksky.net/dev/img/attribution/poweredby.png')",
+                            backgroundPosition: 'center',
+                            backgroundSize: 'contain',
+                            width: 100,
+                            height: 40
+                        }}></div>
+                    </a>
                 </div>
             </div>
         )
