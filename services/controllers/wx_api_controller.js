@@ -6,7 +6,7 @@ module.exports = {
 
     curWeather(req, res) {
         let { lat, lng } = req.params;
-        console.log(lat, lng);
+        // console.log(lat, lng);
         let darkSkyUrl = `https://api.darksky.net/forecast/${darkSkyApiKey}/${lat},${lng}`;
 
         axios.get(darkSkyUrl).then((wxRes) => {
@@ -19,7 +19,11 @@ module.exports = {
                     pressure: cur.pressure,
                     windBearing: cur.windBearing,
                     windSpeed: cur.windSpeed
-                }
+                },
+                // time variables in SECONDS since 1 January 1970
+                curTime: cur.time,
+                sunrise: sunriseTime,
+                sunset: sunsetTime
             });
         });
     },

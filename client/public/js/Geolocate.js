@@ -4,7 +4,7 @@ import { geolocated } from 'react-geolocated';
 class Geolocate extends Component {
     constructor(props){
         super(props);
-    this.handleSetCoords = this.handleSetCoords.bind(this);
+        this.handleSetCoords = this.handleSetCoords.bind(this);
     }
 
     render() {
@@ -19,6 +19,7 @@ class Geolocate extends Component {
                 );
             } else {
                 if (this.props.coords) {
+                    // this.handleSetMyLocCoords();
                     let lat = Math.round(this.props.coords.latitude * 1000000) / 1000000;
                     let lng = Math.round(this.props.coords.longitude * 1000000) / 1000000;
                     return(
@@ -39,13 +40,13 @@ class Geolocate extends Component {
         }
     }
 
-  handleSetCoords() {
-      this.props.setCoords({
-          lat: this.props.coords.latitude,
-          lng: this.props.coords.longitude,
-          address: "Your location"
-      });
-  }
+    handleSetCoords() {
+        this.props.setCoords({
+            lat: this.props.coords.latitude,
+            lng: this.props.coords.longitude,
+            address: "Your location"
+        });
+    }
 
 }
 

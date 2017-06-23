@@ -9,6 +9,8 @@ class WxApp extends Component {
         this.state = {
             lat: null,
             lng: null,
+            myLocLat: null,
+            myLocLng: null,
             address: ""
         }
         this.setCoords = this.setCoords.bind(this);
@@ -19,16 +21,29 @@ class WxApp extends Component {
         if (this.state.lat && this.state.lng) {
             var lat = Math.round(this.state.lat * 1000000) / 1000000;
             var lng = Math.round(this.state.lng * 1000000) / 1000000;
-            currentWx =
-                <CurrentWx
-                    lat={this.state.lat}
-                    lng={this.state.lng}
-                    address={this.state.address}
-                />
+            if (this.state.myLocLat && this.state.myLocLng) {
+                currentWx =
+                    <CurrentWx
+                        lat={this.state.lat}
+                        lng={this.state.lng}
+                        address={this.state.address}
+                    />
+            } else {
+                currentWx =
+                    <CurrentWx
+                        lat={this.state.lat}
+                        lng={this.state.lng}
+                        address={this.state.address}
+                    />
+            }
+
         }
         return(
             <div>
-                <Geolocate setCoords={this.setCoords} />
+                <Geolocate
+                    setCoords={this.setCoords}
+                    setMyLocCoords={this.setMyLocCoords}
+                />
                 <InputLocation setCoords={this.setCoords} />
                 {currentWx}
                 <div>
