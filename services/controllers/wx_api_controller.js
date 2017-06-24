@@ -1,4 +1,8 @@
 const axios = require('axios');
+// const multer = require('multer');
+// const GifEncoder = require('gif-encoder');
+
+const Radar = require('../models/radar');
 const darkSkyApiKey = process.env.DARK_SKY_API_KEY;
 const wUndergroundApiKey = process.env.WUNDERGROUND_API_KEY;
 
@@ -41,8 +45,23 @@ module.exports = {
             + `&newmaps=1&noclutter=1&timelabel=1&timelabel.x=100&timelabel.y=295`;
         axios.get(url).then((response) => {
             // let img = fs.readFileSync(response.data);
-            res.writeHead(200, {'Content-Type': 'image/gif' });
-            res.end(response.data, 'binary');
+            // console.log(response.data);
+            // console.log(gif._readableState.buffer);
+            // res.writeHead(200, {'Content-Type': 'image/gif' });
+            // res.end(gif._readableState.buffer);
+
+            let radar = new Radar();
+            radar.img.data = response.data;
+            radar.img.contentType = 'image/gif';
+            radar.save().then((radarRes) => {
+                console.log(radarRes.img.data.buffer);
+                // res.writeHead(200, {'Content-Type': 'image/gif' });
+                // res.end(radarRes.img.data, 'binary');
+                res.contentType(radarRes.img.contentType);
+                res.send(radarRes.img.data.buffer);
+            });
+            // res.writeHead(200, {'Content-Type': 'image/gif' });
+            // res.end(response.data, 'binary');
             // res.send(response.data);
         });
         // res.send(url);
