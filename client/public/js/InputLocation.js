@@ -6,7 +6,7 @@ class InputLocation extends Component {
         super(props)
         this.state = {
             errorMsg: "",
-            inputAddress: "",
+            inputAddress: "Philadelphia, PA",
             address: "",
             lat: null,
             lng: null
