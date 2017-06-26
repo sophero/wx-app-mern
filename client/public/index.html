@@ -5,6 +5,34 @@
     <title>WxApp</title>
   </head>
   <body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,600,700');
+
+        @keyframes darken {
+            0% { background-color: rgba(0, 0, 0, 0.2); }
+            100% { background-color: rgba(0, 0, 0, 0.5); }
+        }
+
+        .btn {
+            display: block;
+            margin: 12px auto 0 auto;
+            width: 60px;
+            height: 28px;
+            padding: 4px 8px;
+            background-color: #000000;
+            color: #bbd9d0;
+            font-size: 0.7em;
+            font-family: "verdana";
+            border: 1px solid #4b4b4b;
+            border-radius: 5px;
+            /*transition: background-color 0.1s ease-in-out;*/
+        }
+
+        .btn:hover {
+            background-color: #4b4b4b;
+            cursor: pointer;
+        }
+    </style>
     <div id="root"></div>
     <script type="text/javascript" src="/dist/bundle.js">
     </script>

@@ -16,11 +16,16 @@ class WxApp extends Component {
     }
 
     render() {
+        // #render variables
         let currentWx;
         let latLngDisplay;
         let locChosen;
         let chooseLocDivStyles;
-        let overlay;
+        let chooseLocElementsStyle;
+        let geolocateStyles;
+        let inputLocationStyles;
+        let darkSkyRef;
+        let headerStyle;
 
         let overlayStyle = {
             position: "fixed",
@@ -35,6 +40,7 @@ class WxApp extends Component {
 
         let backgroundStyle = {
             color: "#fff",
+            fontFamily: "Josefin Sans, sans-serif",
             position: "fixed",
             width: "100vw",
             height: "100vh",
@@ -50,8 +56,8 @@ class WxApp extends Component {
         }
 
         if (this.state.lat && this.state.lng) {
-            var lat = Math.round(this.state.lat * 1000000) / 1000000;
-            var lng = Math.round(this.state.lng * 1000000) / 1000000;
+            var lat = Math.round(this.state.lat * 100000) / 100000;
+            var lng = Math.round(this.state.lng * 100000) / 100000;
             currentWx =
                 <CurrentWx
                     lat={this.state.lat}
@@ -67,61 +73,102 @@ class WxApp extends Component {
                         Lng: {lng}
                     </div>
                 </div>
+            darkSkyRef =
+                <a href="https://darksky.net/poweredby/" target="_blank" style={{
+                    position: "absolute",
+                    right: "0",
+                    top: "0"
+                }}>
+                    <div style={{
+                        backgroundImage: "url('https://darksky.net/dev/img/attribution/poweredby-darkbackground.png')",
+                        backgroundPosition: 'center',
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        width: 120,
+                        height: 48
+                    }}></div>
+                </a>
             chooseLocDivStyles = {
-
+                display: "flex"
+// #remember
             }
-            overlayStyle.backgroundColor = "rgba(0, 0, 0, 0.6)";
+            overlayStyle.backgroundColor = "rgba(0, 0, 0, 0.5)";
+            overlayStyle.animation = "darken 0.6s";
+
+            headerStyle = {
+                fontSize: "1.5em",
+                margin: "6px 125px 10px 4px",
+                color: "#bbd9d0",
+                lineHeight: "1.5"
+            }
+            chooseLocElementsStyle = {
+                width: "100vw"
+            }
             locChosen = true;
         } else {
             locChosen = false;
+            headerStyle = {
+                fontSize: "1.5em",
+                margin: "0 auto 20px auto",
+                color: "#bbd9d0",
+                lineHeight: "1.5"
+            }
             overlayStyle.backgroundColor = "rgba(0, 0, 0, 0.2)";
             chooseLocDivStyles = {
                 position: 'absolute',
-		    	width: '80%',
-		    	maxWidth: '600px',
-                minWidth: '300px',
-		    	height: '100%',
-		    	maxHeight: '250px',
-                top: '40%',
+                top: '45%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 zIndex: '2',
-                background: 'rgba(0,0,0,0.7)',
-                borderRadius: '10px'
+                width: '80%',
+		    	maxWidth: '600px',
+                minWidth: '300px',
+                // height: '250px',
+		    	minHeight: '200px',
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                borderRadius: '20px',
+                textAlign: 'center',
+                padding: '20px'
             }
         }
         let inputLocation =
             <InputLocation
+                style={inputLocationStyles}
                 setCoords={this.setCoords}
                 locChosen={locChosen}
             />
         let geolocate =
             <Geolocate
+                style={geolocateStyles}
                 setCoords={this.setCoords}
                 setMyLocCoords={this.setMyLocCoords}
                 locChosen={locChosen}
             />
 
+        // #return
         return(
             <div style={backgroundStyle}>
                 <div style={overlayStyle}>
                     <div style={chooseLocDivStyles}>
-                        {geolocate}
-                        {inputLocation}
+                        <h1 style={headerStyle}>
+                            Get current weather data anywhere on the planet.
+                        </h1>
+                        <div style={chooseLocElementsStyle}>
+                            <div style={{
+                                padding: "10px 0 5px 0",
+                                width: "300px",
+                                margin: "0 auto"
+                            }}>{inputLocation}</div>
+                            <div style={{
+                                padding: "10px 0 5px 0",
+                                width: "300px",
+                                margin: "0 auto"
+                            }}>{geolocate}</div>
+                        </div>
                     </div>
                     {currentWx}
                     {latLngDisplay}
-                    <div>
-                        <a href="https://darksky.net/poweredby/" target="_blank">
-                            <div style={{
-                                backgroundImage: "url('https://darksky.net/dev/img/attribution/poweredby.png')",
-                                backgroundPosition: 'center',
-                                backgroundSize: 'contain',
-                                width: 100,
-                                height: 40
-                            }}></div>
-                        </a>
-                    </div>
+                    {darkSkyRef}
                     <div style={{
                         position: "absolute",
                         bottom: "0",
@@ -129,6 +176,7 @@ class WxApp extends Component {
                     }}>
                         <a href="https://commons.wikimedia.org/wiki/File:Thai_rain_forest.jpg" target="_blank" style={{
                             fontSize: "0.6em",
+                            fontFamily: "sans-serif",
                             color: "#fff",
                             textDecoration: "none"
                         }}>

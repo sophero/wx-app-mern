@@ -58,9 +58,8 @@ class CurrentWx extends Component {
 
             return(
                 <div>
-                    <h2>Current weather data</h2>
+                    <h2>Location: {this.state.address}</h2>
                     {locTimes}
-                    <div>Location: {this.state.address}</div>
                     <div>Temperature: {this.state.wx.temp} °F; {tempC} °C</div>
                     <div>Dewpoint: {this.state.wx.dewPoint} °F; {dewPointC} °C</div>
                     <div>MSLP: {this.state.wx.pressure} hPa</div>
@@ -184,9 +183,9 @@ class CurrentWx extends Component {
     parseTime(secs) {
         let d = new Date(secs * 1000);
         let hrs = d.getHours().toString();
-        let mins = d.getMinutes().toString();
+        let mins = d.getMinutes();
         if (mins < 10) {
-            mins += "0";
+            mins = "0" + mins.toString();
         }
         return hrs + ":" + mins;
     }

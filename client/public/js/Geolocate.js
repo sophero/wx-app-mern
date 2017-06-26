@@ -19,20 +19,33 @@ class Geolocate extends Component {
                 );
             } else {
                 if (this.props.coords) {
-                    // this.handleSetMyLocCoords();
-                    let lat = Math.round(this.props.coords.latitude * 1000000) / 1000000;
-                    let lng = Math.round(this.props.coords.longitude * 1000000) / 1000000;
+                    let lat = Math.round(this.props.coords.latitude * 10000) / 10000;
+                    let lng = Math.round(this.props.coords.longitude * 10000) / 10000;
                     return(
                         <div>
-                            <h2>Your location</h2>
-                            <div>Latitude: {lat}</div>
-                            <div>Longitude: {lng}</div>
-                            <button onClick={this.handleSetCoords}>Use this location</button>
+                            <p style={{
+                                fontSize: "1.2em",
+                                margin: "0 0 15px 0",
+                                padding: "0"
+                            }}>or use your location:</p>
+                            <div style={{
+                                fontSize: "1.3em"
+                            }}>
+                                <div>Latitude: <span style={{ fontWeight: "bold" }}>{lat}</span></div>
+                                <div>Longitude: <span style={{ fontWeight: "bold" }}>{lng}</span></div>
+                            </div>
+                            <button className="btn" style={{
+                                width: "150px",
+                                marginTop: "15px"
+                            }} onClick={this.handleSetCoords}>Use your location</button>
                         </div>
                     );
                 } else {
                     return(
-                        <div>Fetching location data..</div>
+                        <div
+                            style={{
+                                padding: "10px"
+                            }}>Fetching location data..</div>
                     );
                 }
 
