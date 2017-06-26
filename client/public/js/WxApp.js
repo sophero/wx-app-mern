@@ -159,6 +159,8 @@ class WxApp extends Component {
                 style={inputLocationStyles}
                 setCoords={this.setCoords}
                 locChosen={locChosen}
+                lat={this.state.lat}
+                lng={this.state.lng}
             />
         let geolocate =
             <Geolocate

@@ -28,11 +28,9 @@ class Geolocate extends Component {
                                 margin: "0 0 15px 0",
                                 padding: "0"
                             }}>or use your location:</p>
-                            <div style={{
-                                fontSize: "0.9em"
-                            }}>
-                                <div>Latitude: <span style={{ fontWeight: "bold", fontSize: "1.3em" }}>{lat}</span></div>
-                                <div>Longitude: <span style={{ fontWeight: "bold", fontSize: "1.3em" }}>{lng}</span></div>
+                            <div>
+                                <div>Lat: <span className="your-coords">{lat}</span></div>
+                                <div>Long: <span className="your-coords">{lng}</span></div>
                             </div>
                             <button className="btn" style={{
                                 width: "150px",

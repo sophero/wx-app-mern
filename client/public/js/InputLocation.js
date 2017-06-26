@@ -17,31 +17,61 @@ class InputLocation extends Component {
         this.selectAll = this.selectAll.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            lat: nextProps.lat,
+            lng: nextProps.lng
+        });
+    }
+
     render() {
+        let inputStyle;
+        let fontStyle;
+        if (this.state.lat && this.state.lng) {
+            fontStyle = {
+                fontSize: "1em"
+            }
+            inputStyle = {
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                color: "#e0e0e0",
+                fontSize: "1em",
+                fontFamily: "verdana",
+                width: "200px",
+                height: "20px",
+                textAlign: "center",
+                padding: "12px 5px",
+                border: "1px solid #bbd9d0",
+                borderRadius: "4px",
+                margin: "0"
+            }
+        } else {
+            fontStyle = {
+                fontSize: "1.3em"
+            }
+            inputStyle = {
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                color: "#e0e0e0",
+                fontSize: "1.3em",
+                fontFamily: "verdana",
+                width: "300px",
+                height: "40px",
+                textAlign: "center",
+                padding: "12px 5px",
+                border: "1px solid #bbd9d0",
+                borderRadius: "4px",
+                margin: "0 0 5px 0"
+            }
+        }
         return(
             <div>
-                <p style={{
-                    fontSize: "1.3em"
-                }}>Enter address / location:</p>
+                <p style={fontStyle}>Enter address / location:</p>
                 <input
                     type="text"
                     onClick={this.selectAll}
                     onChange={this.updateInputAddress}
                     value={this.state.inputAddress}
                     placeholder="Enter address/location"
-                    style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.6)",
-                        color: "#e0e0e0",
-                        fontSize: "1.3em",
-                        fontFamily: "verdana",
-                        width: "300px",
-                        height: "40px",
-                        textAlign: "center",
-                        padding: "12px 5px",
-                        border: "1px solid #bbd9d0",
-                        borderRadius: "4px",
-                        margin: "0 0 5px 0"
-                    }}
+                    style={inputStyle}
                 />
                 <div>{this.state.errorMsg}</div>
                 <button onClick={this.getCoords} className="btn">Enter</button>

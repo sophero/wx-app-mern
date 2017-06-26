@@ -66,11 +66,11 @@ class CurrentWx extends Component {
             if (this.state.sunrise && this.state.sunset && this.state.timezoneName && this.state.locTime) {
                 locTimes =
                 <div>
-                    <div>At {this.parseTime(this.state.locTime)} {this.state.timezoneName}</div>
                     <div>
                         Local sunrise: {this.parseTime(this.state.sunrise)};
                         sunset: {this.parseTime(this.state.sunset)}
                     </div>
+                    <div>At {this.parseTime(this.state.locTime)} {this.state.timezoneName}</div>
                 </div>
             }
 
