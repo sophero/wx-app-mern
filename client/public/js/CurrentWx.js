@@ -46,25 +46,103 @@ class CurrentWx extends Component {
             let kph = this.mphToKph(this.state.wx.windSpeed);
             let knots = this.mphToKnots(this.state.wx.windSpeed);
             let locTimes;
-
+            let latLngDisplay;
+            let containerStyles = {
+                margin: "10px auto",
+                textAlign: "center"
+                // display: "flex",
+                // justifyContent: "center",
+                // flexWrap: "wrap"
+            }
+            if (this.state.lat && this.state.lng) {
+                latLngDisplay =
+                    <div>
+                        <div>
+                            Lat: {this.round(this.state.lat, 4)};
+                            Lng: {this.round(this.state.lng, 4)}
+                        </div>
+                    </div>
+            }
             if (this.state.sunrise && this.state.sunset && this.state.timezoneName && this.state.locTime) {
                 locTimes =
                 <div>
-                    <div>As at {this.parseTime(this.state.locTime)} {this.state.timezoneName}</div>
-                    <div>Sunrise: {this.parseTime(this.state.sunrise)}</div>
-                    <div>Sunset: {this.parseTime(this.state.sunset)}</div>
+                    <div>At {this.parseTime(this.state.locTime)} {this.state.timezoneName}</div>
+                    <div>
+                        Local sunrise: {this.parseTime(this.state.sunrise)};
+                        sunset: {this.parseTime(this.state.sunset)}
+                    </div>
                 </div>
             }
 
+
             return(
                 <div>
-                    <h2>Location: {this.state.address}</h2>
-                    {locTimes}
-                    <div>Temperature: {this.state.wx.temp} °F; {tempC} °C</div>
-                    <div>Dewpoint: {this.state.wx.dewPoint} °F; {dewPointC} °C</div>
-                    <div>MSLP: {this.state.wx.pressure} hPa</div>
-                    <div>Wind direction: {windStr} {this.state.wx.windBearing}°</div>
-                    <div>Wind speed: {knots} knots; {this.state.wx.windSpeed} mph; {kph} kph</div>
+                    <h1 style={{
+                        textAlign: "center",
+                        fontSize: "2.4em",
+                        color: "#bbd9d0"
+                    }}>
+                        {this.state.address}
+                    </h1>
+                    <div style={containerStyles}>
+                        {latLngDisplay}
+                        {locTimes}
+                        <div className="cur-wx-display">
+                            <div className="cur-wx-display-elem">
+                                Temperature:
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {this.round(this.state.wx.temp, 1)} °F
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {this.round(tempC, 1)} °C
+                            </div>
+                        </div>
+                        <div className="cur-wx-display">
+                            <div className="cur-wx-display-elem">
+                                Dewpoint:
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {this.round(this.state.wx.dewPoint, 1)} °F
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {this.round(dewPointC, 1)} °C
+                            </div>
+                        </div>
+                        <div className="cur-wx-display">
+                            <div className="cur-wx-display-elem">
+                                Wind speed:
+                            </div>
+                            <div className="cur-wx-display-elem">
+                                {this.round(knots, 1)} knots
+                            </div>
+                            <div className="cur-wx-display-elem">
+                                {this.round(this.state.wx.windSpeed, 1)} mph
+                            </div>
+                            <div className="cur-wx-display-elem">
+                                {this.round(kph, 1)} kph
+                            </div>
+                        </div>
+                        <div className="cur-wx-display">
+                            <div className="cur-wx-display-elem">
+                                Wind direction:
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {windStr}
+                            </div>
+                            <div className="cur-wx-display-elem emph">
+                                {this.state.wx.windBearing}°
+                            </div>
+                        </div>
+                        <div className="cur-wx-display">
+                            <div className="cur-wx-display-elem">
+                                MSLP:
+                            </div>
+                            <div className="cur-wx-display-elem">
+                                {this.round(this.state.wx.pressure, 1)} hPa
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         } else {
@@ -188,6 +266,14 @@ class CurrentWx extends Component {
             mins = "0" + mins.toString();
         }
         return hrs + ":" + mins;
+    }
+
+    round(num, places) {
+        let val = 1;
+        for (let k = 0; k < places; k++) {
+            val *= 10;
+        }
+        return Math.round(num * val) / val;
     }
 
 }

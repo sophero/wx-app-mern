@@ -18,13 +18,14 @@ class WxApp extends Component {
     render() {
         // #render variables
         let currentWx;
-        let latLngDisplay;
         let locChosen;
         let chooseLocDivStyles;
         let chooseLocElementsStyle;
         let geolocateStyles;
         let inputLocationStyles;
         let darkSkyRef;
+        let modalHeader;
+        let pageHeader;
         let headerStyle;
 
         let overlayStyle = {
@@ -56,23 +57,12 @@ class WxApp extends Component {
         }
 
         if (this.state.lat && this.state.lng) {
-            var lat = Math.round(this.state.lat * 100000) / 100000;
-            var lng = Math.round(this.state.lng * 100000) / 100000;
             currentWx =
                 <CurrentWx
                     lat={this.state.lat}
                     lng={this.state.lng}
                     address={this.state.address}
                 />
-            latLngDisplay =
-                <div>
-                    <div>
-                        Lat: {lat}
-                    </div>
-                    <div>
-                        Lng: {lng}
-                    </div>
-                </div>
             darkSkyRef =
                 <a href="https://darksky.net/poweredby/" target="_blank" style={{
                     position: "absolute",
@@ -89,30 +79,63 @@ class WxApp extends Component {
                     }}></div>
                 </a>
             chooseLocDivStyles = {
-                display: "flex"
+                display: "flex",
+                width: '80%',
+                margin: "0 auto",
+		    	maxWidth: '600px',
+                minWidth: '300px',
+                minHeight: '200px',
+                // backgroundColor: 'rgba(0,0,0,0.6)',
+                // borderRadius: '20px',
+                textAlign: 'center',
+                padding: '20px'
 // #remember
             }
             overlayStyle.backgroundColor = "rgba(0, 0, 0, 0.5)";
             overlayStyle.animation = "darken 0.6s";
-
             headerStyle = {
-                fontSize: "1.5em",
+                fontSize: "1.2em",
+                fontWeight: "normal",
                 margin: "6px 125px 10px 4px",
                 color: "#bbd9d0",
                 lineHeight: "1.5"
             }
+            pageHeader =
+                <h1 style={headerStyle}>
+                    Get current weather data anywhere on the planet.
+                </h1>
             chooseLocElementsStyle = {
                 width: "100vw"
+            }
+            inputLocationStyles = {
+
+            }
+            geolocateStyles = {
+                padding: "10px 0 5px 0",
             }
             locChosen = true;
         } else {
             locChosen = false;
+            inputLocationStyles = {
+                padding: "10px 0 5px 0",
+                width: "300px",
+                margin: "0 auto"
+            }
+            geolocateStyles = {
+                padding: "10px 0 5px 0",
+                width: "300px",
+                margin: "0 auto"
+            }
             headerStyle = {
                 fontSize: "1.5em",
                 margin: "0 auto 20px auto",
                 color: "#bbd9d0",
                 lineHeight: "1.5"
             }
+            modalHeader =
+                <h1 style={headerStyle}>
+                    Get current weather data anywhere on the planet.
+                </h1>
             overlayStyle.backgroundColor = "rgba(0, 0, 0, 0.2)";
             chooseLocDivStyles = {
                 position: 'absolute',
@@ -149,25 +172,15 @@ class WxApp extends Component {
         return(
             <div style={backgroundStyle}>
                 <div style={overlayStyle}>
+                    {pageHeader}
+                    {currentWx}
                     <div style={chooseLocDivStyles}>
-                        <h1 style={headerStyle}>
-                            Get current weather data anywhere on the planet.
-                        </h1>
+                        {modalHeader}
                         <div style={chooseLocElementsStyle}>
-                            <div style={{
-                                padding: "10px 0 5px 0",
-                                width: "300px",
-                                margin: "0 auto"
-                            }}>{inputLocation}</div>
-                            <div style={{
-                                padding: "10px 0 5px 0",
-                                width: "300px",
-                                margin: "0 auto"
-                            }}>{geolocate}</div>
+                            <div style={inputLocationStyles}>{inputLocation}</div>
+                            <div style={geolocateStyles}>{geolocate}</div>
                         </div>
                     </div>
-                    {currentWx}
-                    {latLngDisplay}
                     {darkSkyRef}
                     <div style={{
                         position: "absolute",

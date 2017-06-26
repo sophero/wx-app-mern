@@ -29,10 +29,10 @@ class Geolocate extends Component {
                                 padding: "0"
                             }}>or use your location:</p>
                             <div style={{
-                                fontSize: "1.3em"
+                                fontSize: "0.9em"
                             }}>
-                                <div>Latitude: <span style={{ fontWeight: "bold" }}>{lat}</span></div>
-                                <div>Longitude: <span style={{ fontWeight: "bold" }}>{lng}</span></div>
+                                <div>Latitude: <span style={{ fontWeight: "bold", fontSize: "1.3em" }}>{lat}</span></div>
+                                <div>Longitude: <span style={{ fontWeight: "bold", fontSize: "1.3em" }}>{lng}</span></div>
                             </div>
                             <button className="btn" style={{
                                 width: "150px",

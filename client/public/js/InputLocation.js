@@ -38,13 +38,13 @@ class InputLocation extends Component {
                         height: "40px",
                         textAlign: "center",
                         padding: "12px 5px",
-                        border: "1px solid #ffffff",
+                        border: "1px solid #bbd9d0",
                         borderRadius: "4px",
                         margin: "0 0 5px 0"
                     }}
                 />
-                <button onClick={this.getCoords} className="btn">Enter</button>
                 <div>{this.state.errorMsg}</div>
+                <button onClick={this.getCoords} className="btn">Enter</button>
             </div>
         );
     }
