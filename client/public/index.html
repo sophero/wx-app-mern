@@ -5,6 +5,64 @@
     <title>WxApp</title>
   </head>
   <body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,600,700');
+
+        @keyframes darken {
+            0% { background-color: rgba(0, 0, 0, 0.2); }
+            100% { background-color: rgba(0, 0, 0, 0.6); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .btn {
+            display: block;
+            margin: 12px auto;
+            width: 60px;
+            height: 28px;
+            padding: 4px 8px;
+            background-color: #000000;
+            color: #bbd9d0;
+            font-size: 0.7em;
+            font-family: "verdana";
+            border: 1px solid #4b4b4b;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #4b4b4b;
+            cursor: pointer;
+        }
+
+        .cur-wx-display {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .cur-wx-display-elem {
+            font-size: 1.2em;
+            margin: 10px 30px;
+        }
+
+        .emph {
+            font-weight: bold;
+            color: #bbd9d0;
+            font-size: 1.5em;
+        }
+
+        .your-coords {
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #bbd9d0;
+        }
+
+    </style>
     <div id="root"></div>
     <script type="text/javascript" src="/dist/bundle.js">
     </script>

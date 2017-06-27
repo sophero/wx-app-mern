@@ -14,22 +14,73 @@ class InputLocation extends Component {
         this.updateInputAddress = this.updateInputAddress.bind(this);
         this.getCoords = this.getCoords.bind(this);
         this.handleSetCoords = this.handleSetCoords.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            lat: nextProps.lat,
+            lng: nextProps.lng
+        });
     }
 
     render() {
+        let inputStyle;
+        let fontStyle;
+        if (this.state.lat && this.state.lng) {
+            fontStyle = {
+                fontSize: "1em"
+            }
+            inputStyle = {
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                color: "#e0e0e0",
+                fontSize: "1em",
+                fontFamily: "verdana",
+                width: "200px",
+                height: "20px",
+                textAlign: "center",
+                padding: "12px 5px",
+                border: "1px solid #bbd9d0",
+                borderRadius: "4px",
+                margin: "0"
+            }
+        } else {
+            fontStyle = {
+                fontSize: "1.3em"
+            }
+            inputStyle = {
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                color: "#e0e0e0",
+                fontSize: "1.3em",
+                fontFamily: "verdana",
+                width: "300px",
+                height: "40px",
+                textAlign: "center",
+                padding: "12px 5px",
+                border: "1px solid #bbd9d0",
+                borderRadius: "4px",
+                margin: "0 0 5px 0"
+            }
+        }
         return(
             <div>
-                <p>Enter address / location:</p>
+                <p style={fontStyle}>Enter address / location:</p>
                 <input
                     type="text"
+                    onClick={this.selectAll}
                     onChange={this.updateInputAddress}
                     value={this.state.inputAddress}
                     placeholder="Enter address/location"
+                    style={inputStyle}
                 />
-                <button onClick={this.getCoords}>Enter</button>
                 <div>{this.state.errorMsg}</div>
+                <button onClick={this.getCoords} className="btn">Enter</button>
             </div>
         );
+    }
+
+    selectAll(event) {
+        return event.target.select();
     }
 
     updateInputAddress(event) {
@@ -38,6 +89,9 @@ class InputLocation extends Component {
 
     getCoords() {
         let encodedAddress = encodeURIComponent(this.state.inputAddress);
+        if (encodedAddress === "") {
+            return;
+        }
         let geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}`;
 
         axios.get(geocodeUrl).then((response) => {
