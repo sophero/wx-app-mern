@@ -76,7 +76,9 @@ class CurrentWx extends Component {
 
 
             return(
-                <div>
+                <div style={{
+                    animation: "fadeIn 1s"
+                }}>
                     <h1 style={{
                         textAlign: "center",
                         fontSize: "2.4em",
@@ -100,7 +102,7 @@ class CurrentWx extends Component {
                         </div>
                         <div className="cur-wx-display">
                             <div className="cur-wx-display-elem">
-                                Dewpoint:
+                                Dew Point:
                             </div>
                             <div className="cur-wx-display-elem emph">
                                 {this.round(this.state.wx.dewPoint, 1)} °F
@@ -182,6 +184,7 @@ class CurrentWx extends Component {
             this.getSunTime(sunrise, sunset, curTime);
             // this.getRadar();
         });
+        setTimeout(this.getCurWx, 60000);
     }
 
     getSunTime(sunrise, sunset, curTime) {
